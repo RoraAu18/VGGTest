@@ -14,12 +14,18 @@ public class GunController : MonoBehaviour, iSpawnerUsers<BaseBulletController>
     {
         bulletSpawner.Init(this);
         availBullets = initBullets;
+        SetBulletAmtText();
         currGunConfig = InventoryController.Instance.currGunInUse;
+    }
+    void SetBulletAmtText()
+    {
+        availBulletsLabel.text = "Bullets: " + availBullets.ToString();
     }
     public void EquipGun(GunConfig newConfig) => currGunConfig = newConfig;
     public void Recharge(int extraBullets)
     {
         availBullets += extraBullets;
+        SetBulletAmtText();
     }
     void Update()
     {
@@ -32,7 +38,7 @@ public class GunController : MonoBehaviour, iSpawnerUsers<BaseBulletController>
     {
         bulletSpawner.SpawnNewItem();
         availBullets--;
-        availBulletsLabel.text = availBullets.ToString();
+        SetBulletAmtText();
     }
     public void OnSpawnedCustomizable(BaseBulletController newItem, Pool<BaseBulletController> pool)
     {

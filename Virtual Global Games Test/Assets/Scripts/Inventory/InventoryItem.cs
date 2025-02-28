@@ -12,25 +12,23 @@ public class InventoryItem : MonoBehaviour, IPointerUpHandler
     public TextMeshProUGUI itemName;
     [SerializeField] bool isReusable;
     public OnUseBehavior onUseBehaviour;
-    public void Init(InventoryItemData _data, OnUseBehavior _onUseBehaviour)
+    public Button thisButton;
+    public void Init(InventoryItemData _data, OnUseBehavior _onUseBehaviour, bool _isReusable)
     {
         data = _data;
         onUseBehaviour = _onUseBehaviour;
         itemName.text = _data.itemName;
+        isReusable = _isReusable;
     }
-    void Update()
+    void OnEquipped()
     {
-
+        onUseBehaviour.SpendItem(data);
+        inventoryController.RemoveItem(data, this, isReusable);
     }
-
     public void OnPointerUp(PointerEventData eventData)
     {
+        OnEquipped();
         Debug.Log("pressing ", this);
-        if (EventSystem.current.currentSelectedGameObject == this)
-        {
-            Debug.Log("pressing ", this);
-            onUseBehaviour.SpendItem(data);
-        }
     }
 }
 [Serializable]

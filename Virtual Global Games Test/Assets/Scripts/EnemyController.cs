@@ -39,7 +39,8 @@ public class EnemyController : MonoBehaviour
     }
     public void OnHit()
     {
-        StartCoroutine(damagedCorroutine);
+        RecycleEnemy();
+        //StartCoroutine(damagedCorroutine);
     }
     IEnumerator Damaged()
     {

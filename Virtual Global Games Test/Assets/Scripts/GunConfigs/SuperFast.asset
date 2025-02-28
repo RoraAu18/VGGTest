@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5de31d63813af14bb8e29722f30ab35, type: 3}
   m_Name: SuperFast
   m_EditorClassIdentifier: 
-  shootingForce: 0
-  useTime: 0
-  damageAmt: 0
+  gunName: Super Fast GUN
+  shootingForce: 500
+  useTime: 0.5
+  damageAmt: 1

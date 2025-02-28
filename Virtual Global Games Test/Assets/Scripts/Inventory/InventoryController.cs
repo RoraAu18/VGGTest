@@ -39,7 +39,7 @@ public class InventoryController : MonoBehaviour, iSpawnerUsers<InventoryItem>
         gameManager.onLoadingData += OnLoadingData;
         isVisible = false;
         showHideButton.onClick.AddListener(ShowHideInventory);
-        DisplayDifferentGuns();
+        DisplayAllGunsInInventory();
     }
     #region UI
     public void ShowHideInventory()
@@ -67,11 +67,15 @@ public class InventoryController : MonoBehaviour, iSpawnerUsers<InventoryItem>
             currGunInUse = gunConfigs[inventoryData.gunInUseIdx];
         }
     }
-    void DisplayDifferentGuns()
+    void DisplayAllGunsInInventory()
     {
         for (int i = 0; i < gunConfigs.Count; i++)
         {
-            //SetItemInInventory();
+            var gunItemData = new InventoryItemData();
+            gunItemData.itemType = InventoryItemType.Gun;
+            currGunInUse = gunConfigs[i];
+            gunItemData.itemName = gunConfigs[i].gunName;
+            SetItemInInventory(gunItemData);
         }
     }
     public void SetItemInInventory(InventoryItemData item)
@@ -80,13 +84,26 @@ public class InventoryController : MonoBehaviour, iSpawnerUsers<InventoryItem>
         spawner.SpawnNewItem();
         currInventoryItems.Add(item);
     }
-    public void RemoveItem(InventoryItemData itemToRemove)
+    public void RemoveItem(InventoryItemData itemToRemove, InventoryItem inventoryItem, bool isReusable)
     {
-        currInventoryItems.Remove(itemToRemove);
+        if (!isReusable)
+        {
+            currInventoryItems.Remove(itemToRemove);
+            spawner.pool.RecycleItem(inventoryItem);
+            inventoryItem.gameObject.SetActive(isReusable);
+        }
     }
     public void OnSpawnedCustomizable(InventoryItem newItem, Pool<InventoryItem> pool)
     {
-        newItem.Init(currDataToAdd, GetOnUseBehaviour(currDataToAdd.itemType));
+        var useBehavior = GetOnUseBehaviour(currDataToAdd.itemType);
+        if(useBehavior is GunBehaviour gunBehavior)
+        {
+            gunBehavior = newItem.AddComponent<GunBehaviour>();
+            gunBehavior.gunType = currGunInUse;
+            gunBehavior.isReusable = true;
+            useBehavior = gunBehavior;
+        }
+        newItem.Init(currDataToAdd, useBehavior, useBehavior.isReusable);
     }
     public OnUseBehavior GetOnUseBehaviour(InventoryItemType type)
     {
