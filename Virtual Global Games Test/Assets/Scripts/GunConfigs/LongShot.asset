@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LongShot
   m_EditorClassIdentifier: 
   gunName: Long Shot GUN
+  gunMat: {fileID: 2100000, guid: 66d11b160307d954e97bdb2507ab0fcb, type: 2}
   shootingForce: 150
   useTime: 0.5
   damageAmt: 1

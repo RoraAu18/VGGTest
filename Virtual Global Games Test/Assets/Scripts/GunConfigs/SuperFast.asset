@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SuperFast
   m_EditorClassIdentifier: 
   gunName: Super Fast GUN
+  gunMat: {fileID: 2100000, guid: b5a24ce9e9c91404a81280021b35802f, type: 2}
   shootingForce: 500
   useTime: 0.5
   damageAmt: 1

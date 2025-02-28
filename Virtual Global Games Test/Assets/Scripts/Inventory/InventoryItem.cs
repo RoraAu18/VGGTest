@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
-public class InventoryItem : MonoBehaviour, IPointerUpHandler
+public class InventoryItem : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
     InventoryController inventoryController => InventoryController.Instance;
     public InventoryItemData data;
@@ -13,12 +13,16 @@ public class InventoryItem : MonoBehaviour, IPointerUpHandler
     [SerializeField] bool isReusable;
     public OnUseBehavior onUseBehaviour;
     public Button thisButton;
+    public Image graphic;
+    public Color unSelectedColor;
+    public Color selectedColor;
     public void Init(InventoryItemData _data, OnUseBehavior _onUseBehaviour, bool _isReusable)
     {
         data = _data;
         onUseBehaviour = _onUseBehaviour;
         itemName.text = _data.itemName;
         isReusable = _isReusable;
+        graphic.color = unSelectedColor;
     }
     void OnEquipped()
     {
@@ -28,8 +32,10 @@ public class InventoryItem : MonoBehaviour, IPointerUpHandler
     public void OnPointerUp(PointerEventData eventData)
     {
         OnEquipped();
+        graphic.color = selectedColor;
         Debug.Log("pressing ", this);
     }
+    public void OnPointerDown(PointerEventData eventData) => graphic.color = unSelectedColor;
 }
 [Serializable]
 public class InventoryItemData

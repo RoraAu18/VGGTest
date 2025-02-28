@@ -5,6 +5,7 @@ using UnityEngine;
 public class GunConfig : ScriptableObject
 {
     public string gunName;
+    public Material gunMat;
     public float shootingForce;
     public float useTime;
     public float damageAmt;

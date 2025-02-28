@@ -21,6 +21,11 @@ public class InventoryController : MonoBehaviour, iSpawnerUsers<InventoryItem>
     public GunConfig currGunInUse;
     bool isVisible;
     public static string dataID = "inventoryData";
+    [ContextMenu("ResetData")]
+    public void ResetData()
+    {
+        PlayerPrefs.DeleteKey(dataID);
+    }
     private void Awake()
     {
         if(instance != null && instance != this) DestroyImmediate(this);
@@ -39,7 +44,6 @@ public class InventoryController : MonoBehaviour, iSpawnerUsers<InventoryItem>
         gameManager.onLoadingData += OnLoadingData;
         isVisible = false;
         showHideButton.onClick.AddListener(ShowHideInventory);
-        DisplayAllGunsInInventory();
     }
     #region UI
     public void ShowHideInventory()
@@ -57,15 +61,19 @@ public class InventoryController : MonoBehaviour, iSpawnerUsers<InventoryItem>
     }
     public void OnLoadingData()
     {
+        spawner.pool.RecycleAll();
+        currInventoryItems.Clear();
         inventoryData = dataManager.GetData<InventoryData>(dataID);
         if (inventoryData.inFileData.Count > 0)
         {
             for (int i = 0; i < inventoryData.inFileData.Count; i++)
             {
+                if (inventoryData.inFileData[i].itemType == InventoryItemType.Gun) continue;
                 SetItemInInventory(inventoryData.inFileData[i]);
             }
             currGunInUse = gunConfigs[inventoryData.gunInUseIdx];
         }
+        DisplayAllGunsInInventory();
     }
     void DisplayAllGunsInInventory()
     {
@@ -80,6 +88,7 @@ public class InventoryController : MonoBehaviour, iSpawnerUsers<InventoryItem>
     }
     public void SetItemInInventory(InventoryItemData item)
     {
+        if (currInventoryItems.Contains(item)) return;
         currDataToAdd = item;
         spawner.SpawnNewItem();
         currInventoryItems.Add(item);

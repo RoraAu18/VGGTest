@@ -17,7 +17,7 @@ public class FPSPlayer : MonoBehaviour
     public float gravity;
     Vector3 velocity;
     bool isGrounded;
-    float rotSpeed = 80;
+    float rotSpeed = 120;
     public void Init()
     {
         TryGetComponent(out collisionController);

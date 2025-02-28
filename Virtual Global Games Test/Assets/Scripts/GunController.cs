@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class GunController : MonoBehaviour, iSpawnerUsers<BaseBulletController>
 {
@@ -9,7 +8,7 @@ public class GunController : MonoBehaviour, iSpawnerUsers<BaseBulletController>
     public int availBullets;
     public int initBullets;
     [SerializeField] GunConfig currGunConfig;
-    public TextMeshProUGUI availBulletsLabel;
+    [SerializeField] MeshRenderer gunMaterial;
     public void Init()
     {
         bulletSpawner.Init(this);
@@ -17,11 +16,12 @@ public class GunController : MonoBehaviour, iSpawnerUsers<BaseBulletController>
         SetBulletAmtText();
         currGunConfig = InventoryController.Instance.currGunInUse;
     }
-    void SetBulletAmtText()
+    void SetBulletAmtText() => UIManager.Instance.SetBulletAmount(availBullets);
+    public void EquipGun(GunConfig newConfig)
     {
-        availBulletsLabel.text = "Bullets: " + availBullets.ToString();
+        gunMaterial.material = newConfig.gunMat;
+        currGunConfig = newConfig;
     }
-    public void EquipGun(GunConfig newConfig) => currGunConfig = newConfig;
     public void Recharge(int extraBullets)
     {
         availBullets += extraBullets;

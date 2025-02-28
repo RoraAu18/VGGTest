@@ -100,6 +100,9 @@ MonoBehaviour:
   isReusable: 0
   onUseBehaviour: {fileID: 0}
   thisButton: {fileID: 6366343782516848793}
+  graphic: {fileID: 5919386936367730887}
+  unSelectedColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 0.37582764, g: 0.7785721, b: 0.78113204, a: 1}
 --- !u!114 &6366343782516848793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,13 +239,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BasicGun
   m_EditorClassIdentifier: 
   gunName: Basic GUN
+  gunMat: {fileID: 2100000, guid: c03a1c1157d5fff4e965aa603893873b, type: 2}
   shootingForce: 70
   useTime: 0.2
   damageAmt: 1
