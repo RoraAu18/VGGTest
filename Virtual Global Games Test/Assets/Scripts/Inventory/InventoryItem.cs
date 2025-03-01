@@ -32,10 +32,10 @@ public class InventoryItem : MonoBehaviour, IPointerUpHandler, IPointerDownHandl
     public void OnPointerUp(PointerEventData eventData)
     {
         OnEquipped();
-        graphic.color = selectedColor;
+        graphic.color = unSelectedColor;
         Debug.Log("pressing ", this);
     }
-    public void OnPointerDown(PointerEventData eventData) => graphic.color = unSelectedColor;
+    public void OnPointerDown(PointerEventData eventData) => graphic.color = selectedColor;
 }
 [Serializable]
 public class InventoryItemData

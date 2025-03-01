@@ -1213,7 +1213,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fire with right click, don't let the enemies catch you!
+  m_text: "Aim with Ctrl \nFire with right click \nDon't let the enemies catch you!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1488,8 +1488,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 627, y: 376}
-  m_SizeDelta: {x: 200, y: 125.9481}
+  m_AnchoredPosition: {x: 736.66895, y: 376}
+  m_SizeDelta: {x: 419.3379, y: 125.9481}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &541565803
 MonoBehaviour:
@@ -2796,7 +2796,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2936,7 +2936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 927337100}
   yRotLimit: 15
-  rotSpeed: 120
+  rotSpeed: 160
   movingSmootherBy: 0.01
   yAngle: 120
 --- !u!1 &1157136591
@@ -5162,6 +5162,7 @@ MonoBehaviour:
   initBullets: 20
   currGunConfig: {fileID: 0}
   gunMaterial: {fileID: 1781427869}
+  rotSpeed: 3
 --- !u!1 &1806234348
 GameObject:
   m_ObjectHideFlags: 0
@@ -5871,7 +5872,7 @@ MonoBehaviour:
   spawner:
     pool:
       parent: {fileID: 1352020006}
-      itemPrefab: {fileID: 1853642537032157371, guid: 3289bf86f68f5ca448f7ab23b0656e4a, type: 3}
+      itemPrefab: {fileID: 5908175891510098278, guid: b8c07fd76b0c69446b7b3bd2a616d6a7, type: 3}
       initSize: 0
       itemsInPool: []
       activated: 
@@ -6472,6 +6473,7 @@ MonoBehaviour:
   enemiesSpawner: {fileID: 1634746977}
   source: {fileID: 2094681449}
   clip: {fileID: 8300000, guid: 46644610dd0da694fbae06b70c2a4b07, type: 3}
+  aimingToShoot: 0
   player: {fileID: 927337103}
 --- !u!114 &2094681447
 MonoBehaviour:

@@ -11,7 +11,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] CollisionController collisionController;
     public float speed;
     bool isDead;
-    IEnumerator damagedCorroutine;
     public void Init(Pool<EnemyController> _pool)
     {
         pool = _pool;
@@ -19,8 +18,6 @@ public class EnemyController : MonoBehaviour
         collisionController.collisionEnter += CheckIfFoundTarget;
         collisionController.collisionStay += FollowPlayer;
         collisionController.collisionExit += CleanTarget;
-        damagedCorroutine = Damaged();
-        StopCoroutine(damagedCorroutine);
         isDead = false;
     }
 
@@ -45,14 +42,7 @@ public class EnemyController : MonoBehaviour
         {
             isDead = true;
             RecycleEnemy();
-            //StartCoroutine(damagedCorroutine);
         }
-    }
-    IEnumerator Damaged()
-    {
-        rb.AddForce(Vector3.up * 300);
-        yield return new WaitForSeconds(0.1f);
-        RecycleEnemy();
     }
     public void RecycleEnemy()
     {

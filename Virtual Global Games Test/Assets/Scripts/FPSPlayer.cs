@@ -17,12 +17,12 @@ public class FPSPlayer : MonoBehaviour
     public float gravity;
     Vector3 velocity;
     bool isGrounded;
-    float rotSpeed = 120;
+    float rotSpeed = 160;
     public void Init()
     {
+        this.transform.position = gameManager.startLine.position;
         TryGetComponent(out collisionController);
         TryGetComponent(out rb);
-        transform.position = gameManager.startLine.position;
         collisionController.collisionEnter += OnCollided;
     }
     void Update()
@@ -76,8 +76,12 @@ public class FPSPlayer : MonoBehaviour
             gameManager.OnGameEnded(won: true);
         }
     }
-    private void OnDisable()
+    public void ResetOnRestart()
     {
         collisionController.collisionEnter -= OnCollided;
+    }
+    private void OnDisable()
+    {
+        ResetOnRestart();
     }
 }

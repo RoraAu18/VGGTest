@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] EnemiesSpawner enemiesSpawner;
     public AudioSource source;
     public AudioClip clip;
+    public bool aimingToShoot;
 
     public Action onSavingData;
     public Action onLoadingData;
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
         gameState = GameState.GameOn;
         onLoadingData?.Invoke();
         enemiesCount = 0;
+        enemiesSpawned = 0;
         source.clip = clip;
         source.time = 0;
         source.Play();
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
     public void OnGameEnded(bool won)
     {
         source.Stop();
+        player.ResetOnRestart();
         uiManager.GameEnd(won);
         gameState = GameState.GameOff;
         OnSaving();
